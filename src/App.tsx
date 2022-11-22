@@ -16,8 +16,9 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 import { NavaItems } from './const/NavabarItem';
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, BrowserRouter, useRoutes } from "react-router-dom";
 import {AuthProvider } from './utils/AuthProvider';
+import { routes } from './router';
 
 const drawerWidth: number = 0;
 interface AppBarProps extends MuiAppBarProps {
@@ -47,6 +48,7 @@ function App() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState(1);
   const open = Boolean(anchorEl);
+  const outlet = useRoutes(routes);
   const handleClickListItem = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -114,7 +116,7 @@ function App() {
             ))}
           </Menu>
         </Stack>
-        <Outlet />
+        {outlet}
     </AppBar>
     </AuthProvider>
     </div>
